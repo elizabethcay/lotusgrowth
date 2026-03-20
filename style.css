@@ -1,0 +1,328 @@
+/* ── Reset & Base ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f7f6f3;
+  --surface: #ffffff;
+  --border: #e3e2de;
+  --text: #1a1916;
+  --muted: #6b6a67;
+  --accent: #37352f;
+  --pass: #2d6a4f;
+  --pass-bg: #d8f3dc;
+  --fail: #9d2b2b;
+  --fail-bg: #fde8e8;
+  --opt: #2d5016;
+  --opt-bg: #c6e8a1;
+  --partial: #7a5c00;
+  --partial-bg: #fef3c7;
+  --poor: #7c2020;
+  --poor-bg: #fee2e2;
+  --bar-track: #e3e2de;
+  --bar-pass: #52b788;
+  --bar-fail: #e07070;
+  --dot-idle: #c4c3bf;
+  --dot-load: #f0a500;
+  --dot-live: #52b788;
+  --dot-err: #e07070;
+  --radius: 6px;
+  --mono: "IBM Plex Mono", monospace;
+  --serif: "Lora", Georgia, serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 24px 80px;
+}
+
+/* ── Layout ───────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ── Title ────────────────────────────────────────────────────── */
+h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.3px;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+/* ── Controls row ─────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Radio group */
+.radio-group {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.radio-group label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  border-right: 1px solid var(--border);
+  transition:
+    background 0.12s,
+    color 0.12s;
+  user-select: none;
+  text-align: center;
+}
+
+.radio-group label:last-child {
+  border-right: none;
+}
+
+.radio-group input[type="radio"] {
+  display: none;
+}
+
+.radio-group label.active {
+  background: var(--accent);
+  color: #f7f6f3;
+}
+
+/* Refresh button */
+.btn-refresh {
+  align-self: flex-start;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  cursor: pointer;
+  transition:
+    opacity 0.12s,
+    transform 0.1s;
+}
+
+.btn-refresh:hover {
+  opacity: 0.82;
+}
+.btn-refresh:active {
+  transform: scale(0.97);
+}
+.btn-refresh:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Status bar ───────────────────────────────────────────────── */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  min-height: 18px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dot-idle);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.dot.idle {
+  background: var(--dot-idle);
+}
+.dot.loading {
+  background: var(--dot-load);
+  animation: pulse 0.9s ease-in-out infinite;
+}
+.dot.live {
+  background: var(--dot-live);
+}
+.dot.error {
+  background: var(--dot-err);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ── Result panel ─────────────────────────────────────────────── */
+.result-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+.result-panel.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Factor row */
+.factor {
+  display: grid;
+  grid-template-columns: 90px 1fr 52px 52px;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.factor:last-of-type {
+  border-bottom: none;
+}
+
+.factor-name {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Progress bar */
+.bar-track {
+  height: 6px;
+  background: var(--bar-track);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+  transition:
+    width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background 0.3s;
+}
+
+.bar-fill.pass {
+  background: var(--bar-pass);
+}
+.bar-fill.fail {
+  background: var(--bar-fail);
+}
+
+.factor-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.badge-pf {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.badge-pf.pass {
+  background: var(--pass-bg);
+  color: var(--pass);
+}
+.badge-pf.fail {
+  background: var(--fail-bg);
+  color: var(--fail);
+}
+
+/* Verdict row */
+.verdict-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.verdict-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.verdict-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.verdict-badge.optimal {
+  background: var(--opt-bg);
+  color: var(--opt);
+}
+.verdict-badge.partial {
+  background: var(--partial-bg);
+  color: var(--partial);
+}
+.verdict-badge.poor {
+  background: var(--poor-bg);
+  color: var(--poor);
+}

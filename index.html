@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Lotus Growing Conditions</title>
+
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script src="/src/app.js" defer></script>
+
+    <div class="container">
+      <!-- Title -->
+      <h1>Live Lotus Growing Conditions </h1>
+
+      <!-- Controls -->
+      <div class="controls">
+        <!-- City selector -->
+        <div class="radio-group" id="cityGroup">
+          <label class="active" data-value="hanoi">
+            <input type="radio" name="city" value="hanoi" checked />
+            <span>Hà Nội</span>
+          </label>
+          <label data-value="danang">
+            <input type="radio" name="city" value="danang" />
+            <span>Đà Nẵng</span>
+          </label>
+          <label data-value="hcmc">
+            <input type="radio" name="city" value="hcmc" />
+            <span>Hồ Chí Minh</span>
+          </label>
+        </div>
+
+        <button class="btn-refresh" id="btnRefresh">Refresh  ✿</button>
+      </div>
+
+      <!-- Status bar -->
+      <div class="status-bar">
+        <div class="dot idle" id="statusDot"></div>
+        <span id="statusText">Idle — select a city and press Refresh</span>
+      </div>
+
+      <!-- Result panel (hidden until first fetch) -->
+      <div class="result-panel" id="resultPanel">
+        <!-- Rainfall -->
+        <div class="factor">
+          <span class="factor-name">Rainfall</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="barRain"></div>
+          </div>
+          <span class="factor-value" id="valRain">—</span>
+          <span class="badge-pf" id="badgeRain">—</span>
+        </div>
+
+        <!-- Cloud cover -->
+        <div class="factor">
+          <span class="factor-name">Cloud</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="barCloud"></div>
+          </div>
+          <span class="factor-value" id="valCloud">—</span>
+          <span class="badge-pf" id="badgeCloud">—</span>
+        </div>
+
+        <!-- Humidity -->
+        <div class="factor">
+          <span class="factor-name">Humidity</span>
+          <div class="bar-track">
+            <div class="bar-fill" id="barHumid"></div>
+          </div>
+          <span class="factor-value" id="valHumid">—</span>
+          <span class="badge-pf" id="badgeHumid">—</span>
+        </div>
+
+        <!-- Verdict -->
+        <div class="verdict-row">
+          <span class="verdict-label">Verdict</span>
+          <span class="verdict-badge" id="verdictBadge">—</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
