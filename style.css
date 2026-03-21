@@ -1,4 +1,4 @@
-/* ── Reset & Base ─────────────────────────────────────────────── */
+/* reset + base */
 *,
 *::before,
 *::after {
@@ -48,7 +48,7 @@ body {
   padding: 56px 24px 80px;
 }
 
-/* ── Layout ───────────────────────────────────────────────────── */
+/* layout */
 .container {
   width: 100%;
   max-width: 560px;
@@ -57,7 +57,7 @@ body {
   gap: 36px;
 }
 
-/* ── Title ────────────────────────────────────────────────────── */
+/* title */
 h1 {
   font-family: var(--serif);
   font-weight: 600;
@@ -67,14 +67,14 @@ h1 {
   line-height: 1.25;
 }
 
-/* ── Controls row ─────────────────────────────────────────────── */
+/* controls role */
 .controls {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Radio group */
+/* radio group */
 .radio-group {
   display: flex;
   gap: 0;
@@ -117,7 +117,7 @@ h1 {
   color: #f7f6f3;
 }
 
-/* Refresh button */
+/* refresh button */
 .btn-refresh {
   align-self: flex-start;
   background: var(--accent);
@@ -147,7 +147,7 @@ h1 {
   cursor: not-allowed;
 }
 
-/* ── Status bar ───────────────────────────────────────────────── */
+/* status bar */
 .status-bar {
   display: flex;
   align-items: center;
@@ -191,7 +191,7 @@ h1 {
   }
 }
 
-/* ── Result panel ─────────────────────────────────────────────── */
+/* result panel */
 .result-panel {
   display: flex;
   flex-direction: column;
@@ -234,7 +234,7 @@ h1 {
   color: var(--muted);
 }
 
-/* Progress bar */
+/* progress bar */
 .bar-track {
   height: 6px;
   background: var(--bar-track);
@@ -287,7 +287,7 @@ h1 {
   color: var(--fail);
 }
 
-/* Verdict row */
+/* verdict row */
 .verdict-row {
   display: flex;
   align-items: center;
